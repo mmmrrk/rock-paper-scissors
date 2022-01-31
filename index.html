@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roc, Pap, Siz</title>
+</head>
+<body>
+
+    <script>
+        const ROCK = 'ROCK';
+        const PAPER = 'PAPER';
+        const SCISSORS = 'SCISSORS';
+
+        // Represents the logical outcomes of Rock, Paper, Scissors
+        // Reference this constant as GAME_LOGIC[playerSelection, computerSelection]
+        // to get the results of one round: Tie, Win, Loss
+        const GAME_LOGIC = [
+            ['T', 'L', 'W'],
+            ['W', 'T', 'L'],
+            ['L', 'W', 'T']
+        ];
+        const Map = {
+            'ROCK': 0,
+            'PAPER': 1,
+            'SCISSORS': 2
+        };
+
+        let userWins=0, computerWins=0;
+
+        game();
+
+        function game() {
+            let userPlay;
+
+            console.log("LET'S PLAY ROCK, PAPER, MOTHERFUCKING SCISSORS! Best of 5");
+        
+            for  (let i=0;i<5;i++){
+                userPlay = prompt("Your play? (Rock, Paper, Scissors): ", computerPlay());
+                console.log(playRound(userPlay.toUpperCase(), computerPlay()));
+            }
+
+            console.log("Results: ");
+            console.log("You: " + userWins + "\t\tComputer: " + computerWins);
+            if (userWins > computerWins) {
+                console.log("You Win!");
+            }
+            else if (computerWins > userWins) {
+                console.log("You Lose!");
+            }
+            else {
+                console.log("It's a tie!");
+            }
+        }
+        
+        function computerPlay() {
+            switch (Math.floor(Math.random()*3)) {
+                case 0:
+                    return ROCK;
+                case 1:
+                    return PAPER;
+                case 2:
+                    return SCISSORS;
+            }
+        }
+
+        function playRound(userSelection, computerSelection) {
+            switch (GAME_LOGIC[Map[userSelection]][Map[computerSelection]]) {
+                case 'T':
+                    return 'This round is a tie!';
+                case 'W':
+                    userWins++;
+                    return 'You Win! ' + userSelection + ' beats ' + computerSelection + '!';
+                case 'L':
+                    computerWins++;
+                    return 'You Lose! ' + computerSelection + ' beats ' + userSelection + '!';
+            }
+        }
+    </script>
+    
+</body>
+</html>
